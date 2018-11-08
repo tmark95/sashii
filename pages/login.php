@@ -35,7 +35,7 @@
     <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
     <link rel="stylesheet" href="../estilos.css">
   </head>
-  <body>
+  <body style="margin-top: 5%;">
     <?php if(!empty($message)): ?>
       <p> <?= $message ?></p>
     <?php endif; ?>
