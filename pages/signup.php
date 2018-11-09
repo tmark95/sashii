@@ -7,35 +7,32 @@
     header('Location: logout.php');    
   }
 
-  require '../controller/database.php';
-
   $message = '';
 
- if (!empty($_POST['nombre']) && !empty($_POST['apellido']) && !empty($_POST['email']) && !empty($_POST['confirm_email']) && !empty($_POST['password']) && !empty($_POST['confirm_password'])) {  
+  require '../load.php';
 
-    if($_POST['password'] == $_POST['confirm_password'] && $_POST['email'] == $_POST['confirm_email']){
+  if ($_POST) {
+    $nombre = $_POST['nombre'];
+    $apellido = $_POST['apellido'];
+    $email = $_POST['email'];
+    $email_conf = $_POST['confirm_email'];
+    $pass = $_POST['password'];
+    $pass_conf = $_POST['confirm_password'];
+    $perfil = $_FILES['perfil'];
+    $terms = $_POST['terminos'];
 
-      $query = "SELECT id FROM USERS WHERE email ='".$_POST['email']."'";
-      $consul = mysqli_query($conn, $query);
-      $results = mysqli_fetch_array($consul);
-      
-      if (count($results) == 0) {
+    $usuario = New User($nombre, $apellido, $email, $email_conf, $pass, $pass_conf, $perfil, $terms);
 
-        $query = "INSERT INTO USERS (nombre, apellido, email, password) VALUES ('".$_POST['nombre']."' , '".$_POST['apellido']."' , '".$_POST['email']."' ,'".$_POST['confirm_password']."')";
-        $consul = mysqli_query($conn, $query);     
-           
-        $message = 'Successfully created new user';
+    $errores = Validar::validacionRegistro($usuario);
 
-      }
-      else{
-        $message = 'El email ya existe';
-      }
-
-    }else{
-      $message="El mail o la contraseña no coincide";
+    if (empty($errores)) {
+      $connect=DB::connectDB();
+      DB::guardarUsuario($usuario, $connect);
+      sleep(3);
+      header('Location: login.php');
     }
-    
   }
+
   
 ?>
 <!DOCTYPE html>
@@ -57,14 +54,26 @@
     <span>o <a href="login.php">Login</a></span>
 
     <form action="signup.php" method="POST" enctype="multipart/form-data">
-      <input name="nombre" type="text" placeholder="Ingrese su nombre" required>
-      <input name="apellido" type="text" placeholder="Ingrese su apellido" required>
-      <input name="email" type="email" placeholder="Ingrese su email" required>
+      <input name="nombre" type="text" placeholder="Ingrese su nombre" value="<?php echo (!empty($nombre))?$nombre:""; ?>" required>
+      <?php echo (isset($errores["nombre"]))?'<p style="color:red;">'.$errores["nombre"].'</p>':""; ?>
+      <input name="apellido" type="text" placeholder="Ingrese su apellido"value="<?php echo (!empty($apellido))?$apellido:""; ?>" required>
+      <?php if (isset($errores["apellido"])) {
+              echo '<p style="color:red;">'.$errores["apellido"].'</p>';
+            } ?>
+      <input name="email" type="email" placeholder="Ingrese su email" value="<?php echo (!empty($email))?$email:""; ?>" required>
+      <?php echo (isset($errores["email"]))?'<p style="color:red;">'.$errores["email"].'</p>':""; ?>
+      <?php echo (isset($errores["confirm_email"]))?'<p style="color:red;">'.$errores["confirm_email"].'</p>':""; ?>
       <input name="confirm_email" type="email" placeholder="Confirmar email" required>
+      <?php echo (isset($errores["confirm_email"]))?'<p style="color:red;">'.$errores["confirm_email"].'</p>':""; ?>
       <input name="password" type="password" placeholder="Introduzca su contraseña" required>
+      <?php echo (isset($errores["password"]))?'<p style="color:red;">'.$errores["password"].'</p>':""; ?>
+      <?php echo (isset($errores["confirm_password"]))?'<p style="color:red;">'.$errores["confirm_password"].'</p>':""; ?>
       <input name="confirm_password" type="password" placeholder="Confirmar contraseña" required>
+      <?php echo (isset($errores["confirm_password"]))?'<p style="color:red;">'.$errores["confirm_password"].'</p>':""; ?>
       <label for="perfil">Foto de Perfil</label><br><br>
       <input name="perfil" type="file" ><br><br>
+      <?php echo (isset($errores["perfil"]))?'<p style="color:red;">'.$errores["perfil"].'</p>':""; ?>
+      <?php echo (isset($errores["perfil_ext"]))?'<p style="color:red;">'.$errores["perfil_ext"].'</p>':""; ?>
       <label for="terminos" style="">Acepto los Terminos y Condiciones</label>
       <input name="terminos" type="checkbox" required><br><br>
       <input type="submit" value="Enviar">

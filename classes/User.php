@@ -1,33 +1,28 @@
 <?php
 
-/**
- *
- */
-
 class User
 {
   private $name;
-  private $lastn;
-  private $username;
+  private $apellido;
   private $email;
-  private $emailConfirm;
+  private $email_conf;
   private $pass;
-  private $passConfirm;
-  private $gender;
+  private $pass_conf;
+  private $perfil;
   private $terms;
  
 
-  public function __construct($name, $lastn, $username, $email, $emailConfirm, $pass, $passConfirm, $gender, $terms)
+  public function __construct($name, $apellido, $email, $email_conf, $pass, $pass_conf, $perfil, $terms)
   {
     $this->name = $name;
-    $this->lastn = $lastn;
-    $this->username = $username;
+    $this->apellido = $apellido;
     $this->email = $email;
+    $this->email_conf = $email_conf;
     $this->pass = $pass;
-    $this->gender = $gender;
+    $this->pass_conf = $pass_conf;
+    $this->perfil = $perfil;
     $this->terms = $terms;
   
-
   }
 
 
@@ -41,49 +36,15 @@ class User
     return $this->name;
   }
 
-  public function setLastn($lastn)
+
+  public function setApellido($apellido)
   {
-    $this->name = $lastn;
+    $this->apellido = $apellido;
     return $this;
   }
-
-  public function getLastn()
+  public function getApellido()
   {
-    return $this->lastn;
-  }
-
-  public function setUsername($username)
-  {
-    $this->username = $username;
-    return $this;
-  }
-
-  public function getUsername()
-  {
-    return $this->username;
-  }
-  
-
-  public function setPassword($pass)
-  {
-    $this->name = $name;
-    return $this;
-  }
-  public function getPass()
-  {
-    
-    return $this->pass;
-  }
-
-
-  public function getPassConfirm()
-  {
-    return $this->passConfirm;
-  }
-
-  public function hashPassword()
-  {
-
+    return $this->apellido;
   }
 
   public function setEmail($email)
@@ -94,20 +55,37 @@ class User
   {
     return $this->email;
   }
-  public function getEmailConfirm()
-  {
-    return $this->emailConfirm;
-  }
 
-  public function setGender($gender)
+  public function getEmailConf()
   {
-    $this->gender = $gender;
+    return $this->email_conf;
+  }  
+
+  public function setPassword($pass)
+  {
+    $this->pass = $pass;
     return $this;
   }
-  public function getGender()
+
+  public function getPassword()
   {
-    return $this->gender;
+    return $this->pass;
   }
+
+  public function getPasswordConf()
+  {
+    return $this->pass_conf;
+  }
+
+  public function hashPassword()
+  {
+  }
+
+  public function getPerfil()
+  {
+    return $this->perfil;
+  }
+
   public function setTerms($terms)
   {
     $this->terms = $terms;

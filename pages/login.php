@@ -2,28 +2,19 @@
 
   session_start();
 
-  if (isset($_SESSION['user_id'])) {
+  if (isset($_SESSION['email'])) {
     header('Location: partials/header.php');    
   }
 
   require '../controller/database.php';
 
-  if (!empty($_POST['email']) && !empty($_POST['password'])) {    
-    
-    $query = "SELECT id, email, password FROM USERS WHERE email ='".$_POST['email']."'AND password = '".$_POST['password']."'";
-    $consul = mysqli_query($conn, $query);
-    $results = mysqli_fetch_array($consul);
-    
-    $message = '';   
-    
-    if (count($results) >0) {
-      $_SESSION['user_id'] = $results["id"];
-      header("Location: partials/header.php");
-      #echo '<script>location.href="partials/header.php;</script>';
-    } else {
-      $message = 'Email o contraseña son incorrectos';
-    }
+  require '../funciones.php';
+
+  if ($_POST) {
+    verificar_login($_POST);
+
   }
+  
 ?>
 
 
