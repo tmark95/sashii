@@ -8,11 +8,10 @@ class User
   private $email_conf;
   private $pass;
   private $pass_conf;
-  private $perfil;
   private $terms;
  
 
-  public function __construct($name, $apellido, $email, $email_conf, $pass, $pass_conf, $perfil, $terms)
+  public function __construct($name, $apellido, $email, $email_conf, $pass, $pass_conf, $terms)
   {
     $this->name = $name;
     $this->apellido = $apellido;
@@ -79,11 +78,6 @@ class User
 
   public function hashPassword()
   {
-  }
-
-  public function getPerfil()
-  {
-    return $this->perfil;
   }
 
   public function setTerms($terms)
