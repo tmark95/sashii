@@ -87,8 +87,7 @@ class DB {
                                 session_start();
                                 
                                 $_SESSION["loggedin"] = true;
-                                $_SESSION["id"] = $id;
-                                $_SESSION["username"] = $username;                            
+                                $_SESSION["email"] = $name;                            
                             
                                 header("location: partials/header.php");
                             } else {
