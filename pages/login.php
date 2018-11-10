@@ -11,12 +11,14 @@
   /*if ($_POST) { 
 
     $connect=DB::connectDB();
+    DB::loguearUsuario($usuario, $connect);
 
     
   } */
 
   if ($_POST) {
-    header('Location: partials/header.php');
+    $connect=DB::connectDB();
+    DB::loguearUsuario();
   }
   
 ?>
