@@ -61,8 +61,8 @@ session_start();
 
    <footer>
 		 <li><a href="header.php">Home</a></li>
-     <li><a href="menu.html">El Menu</a></li>
-     <li><a href="faq.html">Faq</a></li>
+     <li><a href="menu.php">El Menu</a></li>
+     <li><a href="faq.php">Faq</a></li>
      <li><a href="contacto.php">Contacto</a></li>
    </footer>
   </main>
