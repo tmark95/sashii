@@ -2,9 +2,9 @@
     
   session_start();
   
-  require '../../controller/database.php';
+  require '../../load.php';
   
-  if (isset($_SESSION['user_id'])) {
+  /*if (isset($_SESSION['user_id'])) {
     $query = "SELECT id, email, password FROM USERS WHERE id ='".$_SESSION['user_id']."'";
     $consul = mysqli_query($conn, $query);
     $results = mysqli_fetch_array($consul);
@@ -17,7 +17,7 @@
   
   if (count($results) > 0) {
     $user = $results;
-  } 
+  } */
 
 ?>
 

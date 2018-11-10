@@ -18,10 +18,9 @@
     $email_conf = $_POST['confirm_email'];
     $pass = $_POST['password'];
     $pass_conf = $_POST['confirm_password'];
-    $perfil = $_FILES['perfil'];
     $terms = $_POST['terminos'];
 
-    $usuario = New User($nombre, $apellido, $email, $email_conf, $pass, $pass_conf, $perfil, $terms);
+    $usuario = New User($nombre, $apellido, $email, $email_conf, $pass, $pass_conf, $terms);
 
     $errores = Validar::validacionRegistro($usuario);
 
@@ -70,10 +69,6 @@
       <?php echo (isset($errores["confirm_password"]))?'<p style="color:red;">'.$errores["confirm_password"].'</p>':""; ?>
       <input name="confirm_password" type="password" placeholder="Confirmar contraseña" required>
       <?php echo (isset($errores["confirm_password"]))?'<p style="color:red;">'.$errores["confirm_password"].'</p>':""; ?>
-      <label for="perfil">Foto de Perfil</label><br><br>
-      <input name="perfil" type="file" ><br><br>
-      <?php echo (isset($errores["perfil"]))?'<p style="color:red;">'.$errores["perfil"].'</p>':""; ?>
-      <?php echo (isset($errores["perfil_ext"]))?'<p style="color:red;">'.$errores["perfil_ext"].'</p>':""; ?>
       <label for="terminos" style="">Acepto los Terminos y Condiciones</label>
       <input name="terminos" type="checkbox" required><br><br>
       <input type="submit" value="Enviar">

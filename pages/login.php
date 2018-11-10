@@ -6,13 +6,17 @@
     header('Location: partials/header.php');    
   }
 
-  require '../controller/database.php';
+  require '../load.php';
 
-  require '../funciones.php';
+  /*if ($_POST) { 
+
+    $connect=DB::connectDB();
+
+    
+  } */
 
   if ($_POST) {
-    verificar_login($_POST);
-
+    header('Location: partials/header.php');
   }
   
 ?>

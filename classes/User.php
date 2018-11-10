@@ -19,7 +19,6 @@ class User
     $this->email_conf = $email_conf;
     $this->pass = $pass;
     $this->pass_conf = $pass_conf;
-    $this->perfil = $perfil;
     $this->terms = $terms;
   
   }
