@@ -21,7 +21,7 @@
     $terms = $_POST['terminos'];
 
     $usuario = New User($nombre, $apellido, $email, $email_conf, $pass, $pass_conf, $terms);
-
+  
     $errores = Validar::validacionRegistro($usuario);
 
     if (empty($errores)) {
@@ -69,8 +69,8 @@
       <?php echo (isset($errores["confirm_password"]))?'<p style="color:red;">'.$errores["confirm_password"].'</p>':""; ?>
       <input name="confirm_password" type="password" placeholder="Confirmar contraseña" required>
       <?php echo (isset($errores["confirm_password"]))?'<p style="color:red;">'.$errores["confirm_password"].'</p>':""; ?>
-      <label for="terminos" style="">Acepto los Terminos y Condiciones</label>
-      <input name="terminos" type="checkbox" required><br><br>
+      <input id= "terminos" name="terminos" type="checkbox" required>
+      <label for="terminos" style="">Acepto los Terminos y Condiciones.</label><br><br>
       <input type="submit" value="Enviar">
     </form>
 

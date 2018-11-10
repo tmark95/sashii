@@ -121,7 +121,7 @@ function logearUsuario($datosLogin) {
 
               header("Location: partials/header.php");
         } else {
-          $message = 'Email o contraseña son incorrectos';
+          $message = 'Email o contrasenia son incorrectos';
         }
       }
     } 
